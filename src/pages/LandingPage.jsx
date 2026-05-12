@@ -1,7 +1,9 @@
+import { useNavigate } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 
 function LandingPage() {
+  const navigate = useNavigate()
   return (
     <div className="page-wrapper">
       <Navbar />
@@ -62,7 +64,9 @@ function LandingPage() {
             </div>
           </div>
         </div>
-        <a href="#daftar" className="btn-primary" style={{marginTop: '2.5rem', display: 'inline-block'}}> Mulai Sekarang </a>
+        <button className="btn-primary" onClick={() => navigate('/Timeline')} style={{marginTop: '3rem'}}>
+          Mulai Sekarang
+        </button>
       </section>
 
       <Footer />
