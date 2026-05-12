@@ -43,6 +43,7 @@
   list-style: none;
   display: flex;
   gap: 2rem;
+  padding-top: 4px;
 }
 
 .navbar-links a {
@@ -440,7 +441,7 @@
   flex-shrink: 0;
 }
 
-.post-username {
+.post-name {
   color: white;
   font-size: 0.95rem;
   font-weight: 600;
@@ -550,7 +551,7 @@
   margin-bottom: 0.2rem;
 }
 
-.comment-username {
+.comment-name {
   color: #4da6ff;
   font-size: 0.85rem;
   font-weight: 600;
@@ -604,7 +605,7 @@
   flex-direction: row;
 }
 
-.comment-self .comment-username {
+.comment-self .comment-name {
   color: #e94560;
 }
 
@@ -782,4 +783,213 @@
   .steps-container {
     flex-direction: column;
   }
+}
+
+/* =================== AUTH PAGES =================== */
+.auth-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0a0a1a, #0d1b3e, #0a0a1a);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+}
+
+.auth-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  padding: 2.5rem 2rem;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.4);
+}
+
+.auth-logo {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.auth-logo h1 {
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 0.4rem;
+}
+
+.auth-logo p {
+  color: #a8a8b3;
+  font-size: 0.95rem;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.form-label {
+  color: #d1d1d1;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.form-input {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  padding: 0.75rem 1rem;
+  color: white;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.form-input:focus {
+  border-color: #4da6ff;
+  background: rgba(77, 166, 255, 0.06);
+}
+
+.form-input::placeholder {
+  color: #555a6e;
+}
+
+.form-input.input-error {
+  border-color: #e94560;
+  background: rgba(233, 69, 96, 0.06);
+}
+
+.form-error {
+  color: #e94560;
+  font-size: 0.78rem;
+  margin-top: 0.1rem;
+}
+
+.auth-alert {
+  background: rgba(233, 69, 96, 0.12);
+  border: 1px solid rgba(233, 69, 96, 0.3);
+  border-radius: 10px;
+  color: #e94560;
+  font-size: 0.875rem;
+  padding: 0.7rem 1rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.auth-btn {
+  background: linear-gradient(135deg, #4da6ff, #e94560);
+  border: none;
+  border-radius: 12px;
+  color: white;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 0.85rem;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.2s;
+  margin-top: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+}
+
+.auth-btn:hover:not(:disabled) {
+  opacity: 0.88;
+  transform: translateY(-1px);
+}
+
+.auth-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-spinner {
+  width: 20px;
+  height: 20px;
+  border: 2.5px solid rgba(255, 255, 255, 0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.auth-switch {
+  text-align: center;
+  color: #a8a8b3;
+  font-size: 0.875rem;
+  margin-top: 1.5rem;
+}
+
+.auth-link {
+  color: #4da6ff;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s;
+}
+
+.auth-link:hover {
+  color: #7dc4ff;
+  text-decoration: underline;
+}
+
+/* Responsive auth */
+@media (max-width: 480px) {
+  .auth-card {
+    padding: 2rem 1.5rem;
+  }
+  .auth-logo h1 {
+    font-size: 1.7rem;
+  }
+}
+
+
+/* Navbar auth buttons */
+.navbar-login-btn {
+  background: rgba(255, 255, 255, 0.08);
+  color: white !important;
+  padding: 0.4rem 1.1rem;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 0.875rem;
+  text-decoration: none;
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+.navbar-login-btn:hover {
+  opacity: 0.85;
+  transform: scale(1.04);
+  color: white !important;
+}
+
+.navbar-user {
+  color: #6a6afc;
+}
+
+.navbar-logout-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
+  color: #a8a8b3;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.875rem;
+  padding: 0.4rem 1rem;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.navbar-logout-btn:hover {
+  background: rgba(233, 69, 96, 0.15);
+  color: #e94560;
+  border-color: rgba(233, 69, 96, 0.3);
 }

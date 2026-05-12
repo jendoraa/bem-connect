@@ -64,7 +64,7 @@ function LandingPage() {
             </div>
           </div>
         </div>
-        <button className="btn-primary" onClick={() => navigate('/Timeline')} style={{marginTop: '3rem'}}>
+        <button className="btn-primary" onClick={() => navigate('/Login')} style={{marginTop: '3rem'}}>
           Mulai Sekarang
         </button>
       </section>

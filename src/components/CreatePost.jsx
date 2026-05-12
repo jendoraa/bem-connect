@@ -6,6 +6,8 @@ function CreatePost({ onPost }) {
   const [preview, setPreview] = useState(null)
   const [showPreview, setShowPreview] = useState(false)
   const fileRef = useRef(null)
+  const currentUser = JSON.parse(localStorage.getItem('bc_currentUser') || 'null')
+  const [isAnonymous, setIsAnonymous] = useState(false)
 
   const handleImage = (e) => {
     const file = e.target.files[0]
@@ -16,9 +18,10 @@ function CreatePost({ onPost }) {
 
   const handleSubmit = () => {
     if (!text.trim() && !preview) return
+    const displayName = currentUser?.name || 'Anonim';
     onPost({
       id: Date.now(),
-      username: 'Kamu',
+      name: displayName,
       time: 'Baru saja',
       text: text,
       image: preview,
