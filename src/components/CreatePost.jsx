@@ -16,17 +16,13 @@ function CreatePost({ onPost }) {
     setPreview(URL.createObjectURL(file))
   }
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (!text.trim() && !preview) return
-    const displayName = currentUser?.name || 'Anonim';
+    const currentUser = JSON.parse(localStorage.getItem('bc_currentUser') || '{}')
     onPost({
-      id: Date.now(),
-      name: displayName,
-      time: 'Baru saja',
       text: text,
       image: preview,
-      likes: 0,
-      comments: []
+      username: currentUser?.username || 'Anonim'
     })
     setText('')
     setImage(null)

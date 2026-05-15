@@ -1,18 +1,20 @@
 import { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
+import { register } from '../api/auth'
 
 function RegisterPage() {
   const navigate = useNavigate()
-  const [form, setForm] = useState({ name: '', username: '', password: '', confirmPassword: '' })
+  const [form, setForm] = useState({ username: '', email: '', password: '', confirmPassword: '' })
   const [errors, setErrors] = useState({})
   const [loading, setLoading] = useState(false)
 
   const validate = () => {
     const errs = {}
-    if (!form.name.trim()) errs.name = 'Nama tidak boleh kosong'
     if (!form.username.trim()) errs.username = 'Username tidak boleh kosong'
     else if (form.username.includes(' ')) errs.username = 'Username tidak boleh mengandung spasi'
     else if (form.username.length < 3) errs.username = 'Username minimal 3 karakter'
+    if (!form.email.trim()) errs.email = 'Email tidak boleh kosong'
+    else if (!form.email.includes('@')) errs.email = 'Email tidak valid'
     if (!form.password) errs.password = 'Password tidak boleh kosong'
     else if (form.password.length < 6) errs.password = 'Password minimal 6 karakter'
     if (!form.confirmPassword) errs.confirmPassword = 'Konfirmasi password wajib diisi'
@@ -25,27 +27,25 @@ function RegisterPage() {
     if (errors[e.target.name]) setErrors({ ...errors, [e.target.name]: '' })
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     const errs = validate()
     if (Object.keys(errs).length > 0) { setErrors(errs); return }
 
     setLoading(true)
-    setTimeout(() => {
-      const stored = JSON.parse(localStorage.getItem('bc_users') || '[]')
-      const exists = stored.find(u => u.username === form.username)
-      if (exists) {
-        setErrors({ username: 'Username sudah dipakai, coba yang lain!' })
-        setLoading(false)
-        return
+    try {
+      const data = await register(form.username, form.email, form.password)
+      if (data.token) {
+        localStorage.setItem('token', data.token)
+        localStorage.setItem('bc_currentUser', JSON.stringify(data.user))
+        navigate('/timeline')
+      } else {
+        setErrors({ general: data.message || 'Registrasi gagal!' })
       }
-
-      const newUser = { name: form.name, username: form.username, password: form.password }
-      localStorage.setItem('bc_users', JSON.stringify([...stored, newUser]))
-      localStorage.setItem('bc_currentUser', JSON.stringify({ username: form.username, name: form.name }))
-      navigate('/timeline')
-      setLoading(false)
-    }, 600)
+    } catch (err) {
+      setErrors({ general: 'Server error, coba lagi!' })
+    }
+    setLoading(false)
   }
 
   return (
@@ -59,29 +59,29 @@ function RegisterPage() {
 
         <form onSubmit={handleSubmit} className="auth-form">
           <div className="form-group">
-            <label className="form-label">Nama Lengkap</label>
-            <input
-              className={`form-input ${errors.name ? 'input-error' : ''}`}
-              type="text"
-              name="name"
-              placeholder="Nama kamu..."
-              value={form.name}
-              onChange={handleChange}
-            />
-            {errors.name && <span className="form-error">{errors.name}</span>}
-          </div>
-
-          <div className="form-group">
             <label className="form-label">Username</label>
             <input
               className={`form-input ${errors.username ? 'input-error' : ''}`}
               type="text"
               name="username"
-              placeholder="Username unik kamu..."
+              placeholder="Username kamu..."
               value={form.username}
               onChange={handleChange}
             />
             {errors.username && <span className="form-error">{errors.username}</span>}
+          </div>
+
+          <div className="form-group">
+            <label className="form-label">Email</label>
+            <input
+              className={`form-input ${errors.email ? 'input-error' : ''}`}
+              type="email"
+              name="email"
+              placeholder="Email kamu..."
+              value={form.email}
+              onChange={handleChange}
+            />
+            {errors.email && <span className="form-error">{errors.email}</span>}
           </div>
 
           <div className="form-group">

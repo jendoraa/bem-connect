@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
+import { login } from '../api/auth'
 
 function LoginPage() {
   const navigate = useNavigate()
@@ -20,23 +21,25 @@ function LoginPage() {
     if (errors[e.target.name]) setErrors({ ...errors, [e.target.name]: '' })
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     const errs = validate()
     if (Object.keys(errs).length > 0) { setErrors(errs); return }
 
     setLoading(true)
-    setTimeout(() => {
-      const stored = JSON.parse(localStorage.getItem('bc_users') || '[]')
-      const user = stored.find(u => u.username === form.username && u.password === form.password)
-      if (user) {
-        localStorage.setItem('bc_currentUser', JSON.stringify({ username: user.username, name: user.name }))
+    try {
+      const data = await login(form.username, form.password)
+      if (data.token) {
+        localStorage.setItem('token', data.token)
+        localStorage.setItem('bc_currentUser', JSON.stringify(data.user))
         navigate('/timeline')
       } else {
-        setErrors({ general: 'Username atau password salah!' })
+        setErrors({ general: data.message || 'Username atau password salah!' })
       }
-      setLoading(false)
-    }, 600)
+    } catch (err) {
+      setErrors({ general: 'Server error, coba lagi!' })
+    }
+    setLoading(false)
   }
 
   return (

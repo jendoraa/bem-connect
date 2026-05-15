@@ -10,7 +10,7 @@ function PostCard({ post }) {
   const [newComment, setNewComment] = useState('')
 
   const currentUser = JSON.parse(localStorage.getItem('bc_currentUser') || '{}')
-  const displayName = currentUser?.name || 'Anonim'
+  const displayName = currentUser?.username || 'Anonim'
 
   const handleLike = () => {
     setLiked(!liked)
@@ -21,7 +21,7 @@ function PostCard({ post }) {
     if (!newComment.trim()) return
     setComments([...comments, {
       id: Date.now(),
-      name: displayName,
+      username: displayName,
       text: newComment,
       time: 'Baru saja',
       replies: []
@@ -37,7 +37,7 @@ function PostCard({ post }) {
           ...c,
           replies: [...(c.replies || []), {
             id: Date.now(),
-            name: displayName,
+            username: displayName,
             text: replyText,
             time: 'Baru saja'
           }]
@@ -53,9 +53,9 @@ function PostCard({ post }) {
     <>
       <div className="post-card">
         <div className="post-header">
-          <div className="post-avatar">{post.name[0].toUpperCase()}</div>
+          <div className="post-avatar">{post.username[0].toUpperCase()}</div>
           <div>
-            <h4 className="post-name">{post.name}</h4>
+            <h4 className="post-name">{post.username}</h4>
             <p className="post-time">{post.time}</p>
           </div>
         </div>
@@ -76,9 +76,9 @@ function PostCard({ post }) {
           <div className="modal" onClick={(e) => e.stopPropagation()}>
             <div className="modal-header">
               <div className="post-header">
-                <div className="post-avatar">{post.name[0].toUpperCase()}</div>
+                <div className="post-avatar">{post.username[0].toUpperCase()}</div>
                 <div>
-                  <h4 className="post-name">{post.name}</h4>
+                  <h4 className="post-name">{post.username}</h4>
                   <p className="post-time">{post.time}</p>
                 </div>
               </div>
@@ -103,17 +103,17 @@ function PostCard({ post }) {
               )}
               {comments.map(comment => (
                 <div key={comment.id}>
-                  <div className={`comment ${comment.name === displayName ? 'comment-self' : ''}`}>
-                    {comment.name !== currentUser.name && (
-                      <div className="comment-avatar">{comment.name[0].toUpperCase()}</div>
+                  <div className={`comment ${comment.username === displayName ? 'comment-self' : ''}`}>
+                    {comment.username !== currentUser.username && (
+                      <div className="comment-avatar">{comment.username[0].toUpperCase()}</div>
                     )}
                     <div className="comment-content">
                       <div className="comment-header">
-                        <span className="comment-name">{comment.name}</span>
+                        <span className="comment-name">{comment.username}</span>
                         <span className="comment-time">{comment.time}</span>
                       </div>
                       <p className="comment-text">{comment.text}</p>
-                      {comment.name !== displayName && (
+                      {comment.username !== displayName && (
                         <button
                           className="reply-btn"
                           onClick={() => setReplyTo(replyTo === comment.id ? null : comment.id)}
@@ -128,7 +128,7 @@ function PostCard({ post }) {
                     <div className="reply-input-container">
                       <input
                         className="reply-input"
-                        placeholder={`Balas ${comment.name}...`}
+                        placeholder={`Balas ${comment.username}...`}
                         value={replyText}
                         onChange={(e) => setReplyText(e.target.value)}
                         onKeyDown={(e) => e.key === 'Enter' && handleReply(comment.id)}
@@ -140,10 +140,10 @@ function PostCard({ post }) {
 
                   {comment.replies && comment.replies.map(reply => (
                     <div key={reply.id} className="comment reply">
-                      <div className="comment-avatar reply-avatar">{reply.name[0].toUpperCase()}</div>
+                      <div className="comment-avatar reply-avatar">{reply.username[0].toUpperCase()}</div>
                       <div className="comment-content">
                         <div className="comment-header">
-                          <span className="comment-name">{reply.name}</span>
+                          <span className="comment-name">{reply.username}</span>
                           <span className="comment-time">{reply.time}</span>
                         </div>
                         <p className="comment-text">{reply.text}</p>
