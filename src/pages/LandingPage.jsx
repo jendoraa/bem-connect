@@ -9,7 +9,7 @@ function LandingPage() {
       <Navbar />
 
       {/* Hero Section */}
-      <section className="hero" id="hero">
+      <section className="hero">
         <div className="hero-content">
           <h1>Selamat Datang di <span className="bem">BEM</span><span className="connect"> Connect</span></h1>
           <p>Platform khusus untuk ngepost hal hal seru di BEM</p>

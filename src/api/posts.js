@@ -71,3 +71,16 @@ export const addReply = async (comment_id, text) => {
   })
   return res.json()
 }
+
+export const uploadImage = async (file) => {
+  const formData = new FormData()
+  formData.append('image', file)
+  const res = await fetch(`${BASE_URL}/upload`, {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${getToken()}`
+    },
+    body: formData
+  })
+  return res.json()
+}

@@ -6,7 +6,7 @@ function Navbar() {
 
   const handleLogout = () => {
     localStorage.removeItem('bc_currentUser')
-    navigate('/')
+    navigate('/#hero')
   }
 
   return (

@@ -1,4 +1,5 @@
 import { useState, useRef } from 'react'
+import { uploadImage } from '../api/posts'
 
 function CreatePost({ onPost }) {
   const [text, setText] = useState('')
@@ -17,11 +18,17 @@ function CreatePost({ onPost }) {
   }
 
   const handleSubmit = async () => {
-    if (!text.trim() && !preview) return
-    const currentUser = JSON.parse(localStorage.getItem('bc_currentUser') || '{}')
+    if (!text.trim() && !image) return
+    
+    let imageUrl = null
+    if (image) {
+      const data = await uploadImage(image)
+      imageUrl = data.url
+    }
+
     onPost({
       text: text,
-      image: preview,
+      image: imageUrl,
       username: currentUser?.username || 'Anonim'
     })
     setText('')
