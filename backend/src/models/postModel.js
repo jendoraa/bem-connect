@@ -15,7 +15,7 @@ const createPostsTable = async () => {
 }
 
 const getAllPosts = async () => {
-  const result = await pool.query('SELECT * FROM posts ORDER BY created_at ASC')
+  const result = await pool.query('SELECT * FROM posts ORDER BY created_at DESC')
   return result.rows
 }
 
