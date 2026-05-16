@@ -57,6 +57,10 @@ function RegisterPage() {
           <p>Buat akun baru</p>
         </div>
 
+        {errors.general && (
+          <div className="auth-alert">{errors.general}</div>
+        )}
+
         <form onSubmit={handleSubmit} className="auth-form">
           <div className="form-group">
             <label className="form-label">Username</label>
