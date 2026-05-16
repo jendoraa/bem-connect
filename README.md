@@ -1,16 +1,110 @@
-# React + Vite
+# 🔗 BEM Connect
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Platform khusus untuk ngepost hal hal seru di BEM seperti kegiatan, pengumuman, sampai momen kebersamaan.
 
-Currently, two official plugins are available:
+## 🛠️ Tech Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+### Frontend
+- React + Vite
+- React Router DOM
 
-## React Compiler
+### Backend
+- ExpressJS
+- PostgreSQL
+- JWT Authentication
+- Multer (Image Upload)
+- Bcrypt
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 📁 Struktur Project
+```
+bem-connect/
+├── backend/                # ExpressJS Backend
+│   └── src/
+│       ├── config/         # Database & Multer config
+│       ├── controllers/
+│       ├── middleware/
+│       ├── models/
+│       ├── routes/
+│       └── uploads/        # Uploaded images
+│   
+├── src/                    # React Frontend
+│   ├── api/                # API handlers
+|   ├── assets/
+│   ├── components/
+│   └── pages/
+└── public/
+```
 
-## Expanding the ESLint configuration
+## ⚙️ Environment Variables
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Buat file `.env` di folder `backend/`:
+
+```env
+DB_HOST=localhost
+DB_PORT=5432
+DB_NAME=bemconnect
+DB_USER=postgres
+DB_PASSWORD=your_password
+JWT_SECRET=your_secret_key
+PORT=5000
+```
+
+## 🚀 Cara Deploy Lokal
+
+### Prerequisites
+- Node.js v18+
+- PostgreSQL v16+
+
+### 1. Clone Repository
+```bash
+git clone https://github.com/jendoraa/bem-connect.git
+cd bem-connect
+```
+
+### 2. Setup Database
+```bash
+sudo -u postgres psql
+```
+```sql
+CREATE DATABASE bemconnect;
+\q
+```
+
+### 3. Setup Backend
+```bash
+cd backend
+npm install
+```
+
+Buat file `.env` dan isi sesuai environment variables di atas.
+
+```bash
+npm run dev
+```
+
+Server berjalan di `http://localhost:5000`
+
+### 4. Setup Frontend
+Buka terminal baru:
+```bash
+cd bem-connect
+npm install
+npm run dev
+```
+
+Frontend berjalan di `http://localhost:5173`
+
+## 📱 Fitur
+
+- ✅ Landing Page
+- ✅ Register & Login dengan JWT
+- ✅ Timeline dengan postingan
+- ✅ Upload gambar
+- ✅ Like & Unlike post
+- ✅ Komentar & Reply
+- ✅ Responsive design
+
+## 👥 Kontak
+
+- CP: Nanda
+- ID LINE: 16273551
