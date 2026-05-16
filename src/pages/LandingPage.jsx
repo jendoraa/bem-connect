@@ -1,9 +1,13 @@
 import { useNavigate } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
+import speedIcon from '../assets/fast.jpeg'
+import peopleIcon from '../assets/community.jpeg'
+import smartIcon from '../assets/cerdas.jpeg'
 
 function LandingPage() {
   const navigate = useNavigate()
+  const currentUser = JSON.parse(localStorage.getItem('bc_currentUser') || 'null')
   return (
     <div className="page-wrapper">
       <Navbar />
@@ -21,16 +25,16 @@ function LandingPage() {
         <h2>Kenapa BEM Connect?</h2>
         <div className="features-grid">
           <div className="feature-card">
-            <h3>Cepet Bgt Njir No Cap</h3>
-            <p>Akses platform dengan cepat dari device apapun tanpa hambatan.</p>
+            <img src={speedIcon} alt="cepat" className="feature-icon" />
+            <h3>Terakses dengan Cepat</h3>
           </div>
           <div className="feature-card">
-            <h3>Bersama kita Mewing</h3>
-            <p>Terhubung dengan seluruh anggota BEM Fasilkom UI dalam satu platform.</p>
+            <img src={peopleIcon} alt="kebersamaan" className="feature-icon" />
+            <h3>Terhubung Lebih Dekat</h3>
           </div>
           <div className="feature-card">
-            <h3>Sharing Rispek w Bro</h3>
-            <p>Sharing kuis, tugas, hingga momen kebersamaan jadi lebih mudah!</p>
+            <img src={smartIcon} alt="cerdas" className="feature-icon" />
+            <h3>Tumbuh & Berkembang</h3>
           </div>
         </div>
       </section>
@@ -64,7 +68,7 @@ function LandingPage() {
             </div>
           </div>
         </div>
-        <button className="btn-primary" onClick={() => navigate('/Login')} style={{marginTop: '3rem'}}>
+        <button className="btn-primary" onClick={() => navigate(currentUser ? '/timeline' : '/login')} style={{marginTop: '3rem'}}>
           Mulai Sekarang
         </button>
       </section>

@@ -8,7 +8,7 @@
 .page-wrapper {
   min-height: 100;
   background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.7)), 
-              url('/src/assets/test.png') center/cover no-repeat;
+              url('/background.png') center/cover no-repeat;
 }
 
 .bem {
@@ -124,33 +124,37 @@
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 2rem;
+  padding: 1.2rem 1.5rem;
   border-radius: 16px;
   display: flex;
+  flex-direction: row;
   align-items: center;
-  gap: 1.5rem;
+  gap: 1rem;
   text-align: left;
   transition: transform 0.3s;
+}
+
+.feature-card span {
+  font-size: 2rem;
+  flex-shrink: 0;
+}
+
+.feature-card h3 {
+  color: #4da6ff;
+  font-size: 2rem;
+  margin: 1rem;
 }
 
 .feature-card:hover {
   transform: translateX(8px);
 }
 
-.feature-card span {
-  font-size: 3.5rem;
+.feature-icon {
+  width: 5rem;
+  height: 5rem;
+  object-fit: contain;
   flex-shrink: 0;
-}
-
-.feature-card h3 {
-  color: #4da6ff;
-  margin-bottom: 0.4rem;
-  font-size: 1.2rem;
-}
-
-.feature-card p {
-  color: #a8a8b3;
-  font-size: 0.95rem;
+  border-radius: 8px;
 }
 
 

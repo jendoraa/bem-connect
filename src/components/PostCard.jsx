@@ -93,7 +93,7 @@ function PostCard({ post }) {
         <div className="post-header">
           <div className="post-avatar">{post.username[0].toUpperCase()}</div>
           <div>
-            <h4 className="post-username">{post.username}</h4>
+            <h4 className="post-name">{post.username}</h4>
             <p className="post-time">{post.time || 'Baru saja'}</p>
           </div>
         </div>
@@ -116,7 +116,7 @@ function PostCard({ post }) {
               <div className="post-header">
                 <div className="post-avatar">{post.username[0].toUpperCase()}</div>
                 <div>
-                  <h4 className="post-username">{post.username}</h4>
+                  <h4 className="post-name">{post.username}</h4>
                   <p className="post-time">{post.time || 'Baru saja'}</p>
                 </div>
               </div>
@@ -149,7 +149,7 @@ function PostCard({ post }) {
                       )}
                       <div className="comment-content">
                         <div className="comment-header">
-                          <span className="comment-username">{comment.username}</span>
+                          <span className="comment-name">{comment.username}</span>
                           <span className="comment-time">{comment.time || 'Baru saja'}</span>
                         </div>
                         <p className="comment-text">{comment.text}</p>
@@ -183,7 +183,7 @@ function PostCard({ post }) {
                         <div className="comment-avatar reply-avatar">{(reply.username || 'A')[0].toUpperCase()}</div>
                         <div className="comment-content">
                           <div className="comment-header">
-                            <span className="comment-username">{reply.username}</span>
+                            <span className="comment-name">{reply.username}</span>
                             <span className="comment-time">{reply.time || 'Baru saja'}</span>
                           </div>
                           <p className="comment-text">{reply.text}</p>
