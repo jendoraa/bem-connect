@@ -6,6 +6,7 @@ function CreatePost({ onPost }) {
   const [image, setImage] = useState(null)
   const [preview, setPreview] = useState(null)
   const [showPreview, setShowPreview] = useState(false)
+  const [isPosting, setIsPosting] = useState(false)
   const fileRef = useRef(null)
   const currentUser = JSON.parse(localStorage.getItem('bc_currentUser') || 'null')
   const [isAnonymous, setIsAnonymous] = useState(false)
@@ -19,22 +20,30 @@ function CreatePost({ onPost }) {
 
   const handleSubmit = async () => {
     if (!text.trim() && !image) return
+    if (isPosting) return
     
-    let imageUrl = null
-    if (image) {
-      const data = await uploadImage(image)
-      imageUrl = data.url
-    }
+    setIsPosting(true)
+    try {
+      let imageUrl = null
+      if (image) {
+        const data = await uploadImage(image)
+        imageUrl = data.url
+      }
 
-    onPost({
-      text: text,
-      image: imageUrl,
-      username: currentUser?.username || 'Anonim'
-    })
-    setText('')
-    setImage(null)
-    setPreview(null)
-    if (fileRef.current) fileRef.current.value = ''
+      onPost({
+        text: text,
+        image: imageUrl,
+        username: currentUser?.username || 'Anonim'
+      })
+      setText('')
+      setImage(null)
+      setPreview(null)
+      if (fileRef.current) fileRef.current.value = ''
+    } catch (err) {
+      console.error('Error posting:', err)
+    } finally {
+      setIsPosting(false)
+    }
   }
 
   const handleKeyDown = (e) => {
@@ -74,8 +83,8 @@ function CreatePost({ onPost }) {
             Foto
             <input type="file" accept="image/*" onChange={handleImage} hidden ref={fileRef} />
           </label>
-          <button className="upload-btn" onClick={handleSubmit}>
-            Post
+          <button className="upload-btn" onClick={handleSubmit} disabled={isPosting}>
+            {isPosting ? 'Posting...' : 'Post'}
           </button>
         </div>
       </div>
