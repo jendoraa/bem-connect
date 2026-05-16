@@ -103,3 +103,9 @@ Frontend berjalan di `http://localhost:5173`
 - ✅ Like & Unlike post
 - ✅ Komentar & Reply
 - ✅ Responsive design
+
+## Frontend Environment Variables
+Buat file `.env` di root folder:
+```
+VITE_API_URL=http://localhost:5000/api
+```
