@@ -103,8 +103,3 @@ Frontend berjalan di `http://localhost:5173`
 - ✅ Like & Unlike post
 - ✅ Komentar & Reply
 - ✅ Responsive design
-
-## 👥 Kontak
-
-- CP: Nanda
-- ID LINE: 16273551
